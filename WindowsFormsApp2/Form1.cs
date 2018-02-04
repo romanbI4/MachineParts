@@ -136,12 +136,17 @@ namespace WindowsFormsApp2
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            float T = (float.Parse(textBox1.Text)), n = (float.Parse(textBox2.Text)), nu_sinh = (float.Parse(textBox3.Text)), U = (float.Parse(textBox4.Text)),
-                n_rem_per = (float.Parse(textBox5.Text)), n_pod = (float.Parse(textBox6.Text)), n_zub = (float.Parse(textBox7.Text));
-            float N_vhod = float.Parse(comboBox2.SelectedItem.ToString()), power = float.Parse(comboBox1.SelectedItem.ToString());
-            string select = comboBox3.SelectedItem.ToString();//Из списка вытягиваем выбранное значение
+            T = (float.Parse(textBox1.Text));
+            n = (float.Parse(textBox2.Text));
+            nu_sinh = (float.Parse(textBox3.Text));
+            U = (float.Parse(textBox4.Text));
+            n_rem_per = (float.Parse(textBox5.Text));
+            n_pod = (float.Parse(textBox6.Text));
+            n_zub = (float.Parse(textBox7.Text));
+            N_vhod = float.Parse(comboBox2.SelectedItem.ToString()); 
+            power = float.Parse(comboBox1.SelectedItem.ToString());
+            select = comboBox3.SelectedItem.ToString();//Из списка вытягиваем выбранное значение
             Calculation();
-
         }
 
         //public void Calculation1()
