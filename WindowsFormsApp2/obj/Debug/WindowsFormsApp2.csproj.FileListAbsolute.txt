@@ -7,7 +7,6 @@ C:\Users\vdovr\Desktop\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsA
 C:\Users\vdovr\Desktop\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
 C:\Users\vdovr\Desktop\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
 C:\Users\vdovr\Desktop\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
-C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csprojResolveAssemblyReference.cache
 C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form1.resources
 C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
 C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.GenerateResource.Cache

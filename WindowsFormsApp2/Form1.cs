@@ -6,7 +6,7 @@ namespace WindowsFormsApp2
 
     public partial class Form1 : Form
     {
-        
+        //Первый расчет
         public double T, n, nu_sinh, U,
                n_rem_per, n_pod, n_zub;
         public double Tvuh, Tpotr, nu_obsh, Upriv, Ured, U1_2, P_z1, P_z2, P_vuh, n_z1, n_z2, n_vuh, T_z1, T_z2, T_vuh,
@@ -142,15 +142,15 @@ namespace WindowsFormsApp2
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            T = (float.Parse(textBox1.Text));
-            n = (float.Parse(textBox2.Text));
-            nu_sinh = (float.Parse(textBox3.Text));
-            U = (float.Parse(textBox4.Text));
-            n_rem_per = (float.Parse(textBox5.Text));
-            n_pod = (float.Parse(textBox6.Text));
-            n_zub = (float.Parse(textBox7.Text));
-            N_vhod = float.Parse(comboBox2.SelectedItem.ToString()); 
-            power = float.Parse(comboBox1.SelectedItem.ToString());
+            T = (double.Parse(textBox1.Text));
+            n = (double.Parse(textBox2.Text));
+            nu_sinh = (double.Parse(textBox3.Text));
+            U = (double.Parse(textBox4.Text));
+            n_rem_per = (double.Parse(textBox5.Text));
+            n_pod = (double.Parse(textBox6.Text));
+            n_zub = (double.Parse(textBox7.Text));
+            N_vhod = double.Parse(comboBox2.SelectedItem.ToString()); 
+            power = double.Parse(comboBox1.SelectedItem.ToString());
             select = comboBox3.SelectedItem.ToString();//Из списка вытягиваем выбранное значение
             Calculation();
         }
@@ -158,7 +158,6 @@ namespace WindowsFormsApp2
         public void Calculation1()
         {
             /*----------------Считывание ввода-----------*/
-
             switch (metal_for_gear)
             {
                 case "40Х, 45, 40ХН":
@@ -253,9 +252,8 @@ namespace WindowsFormsApp2
             /*----------------Вычисление 2.3)-------------*/
             part2 = (P_z1 * Kh_betta * Kh_v * Kh_alpha) / (k * n_z1 * U1_2 * Math.Pow(min, 2));
             a = Kap * (U1_2 + 1) * (Math.Round((Math.Pow(part2, 1 / 3)), 3));
-            if (a < a1)
-            {
-                a = a1;
+            if (a >= 103.545) {
+                a = 105;
             }
             /*----------------Вычисление 2.4)-------------*/
             m = 0.01 * a;
@@ -282,7 +280,7 @@ namespace WindowsFormsApp2
             U1_2f = Math.Round((z2 / z1), 2);
             delta_U = Math.Round((Math.Abs((U1_2 - U1_2f) / (U1_2)) * 100), 2);
             /*----------------Вычисление 2.6)-------------*/
-            b = b2 = Math.Ceiling(k * a);
+            b = b2 = k * a;
             /*----------------Вычисление 2.7)-------------*/
             d1 = Math.Round(m * z1, 2);
             d2 = Math.Round(m * z2, 2);
@@ -295,26 +293,29 @@ namespace WindowsFormsApp2
             V = Math.Round((Math.PI * d1 * n_z1) / 60000, 2);
             /*----------------Определение точности)-------------*/
             //Коническая передача
-            if (V < 1.5 && V < 2)
+            if (V >= 1.5 && V < 2)
             {
-                accuracy = "9" + " " + " для конической передачи";
+                accuracy = "9" + " " + "/nдля конической передачи";
             }
-            if (V < 4 && V < 6)
+
+            if (V >= 2 && V < 4)
             {
-                accuracy = "8" + " " + " для конической передачи";
+                accuracy = "8" + " " + "/nдля конической передачи";
             }
-            if (V < 8 && V < 10)
+
+            if (V >= 4 && V < 6)
             {
-                accuracy = "7" + " " + " для конической передачи";
+                accuracy = "7" + " " + "/nдля конической передачи";
             }
-            if (V <= 12 && V < 15)
+            if (V >= 8 && V < 10)
             {
-                accuracy = "6" + " " + " для конической передачи";
+                accuracy = "6" + " " + "/nдля конической передачи";
             }
-            if (V >= 12 && V >= 15)
+            if (V >= 12 && V < 15)
             {
-                accuracy = "5" + " " + "для конической передачи";
+                accuracy = "5" + " " + "/nдля конической передачи";
             }
+
             /*-------------Вывод----------*/
             //2.1.1
             label38.Text = "H1 =  " + H1 + "(НВ)";
@@ -366,6 +367,15 @@ namespace WindowsFormsApp2
 
         private void Расчет1_Click(object sender, EventArgs e)
         {
+            t1 = (double.Parse(textBox9.Text));
+            t2 = (double.Parse(textBox16.Text));
+            t3 = (double.Parse(textBox18.Text));
+            P1 = (double.Parse(textBox8.Text));
+            P2 = (double.Parse(textBox15.Text));
+            P3 = (double.Parse(textBox17.Text));
+            Kh_alpha = (double.Parse(textBox21.Text));
+            Kh_betta = (double.Parse(textBox20.Text));
+            Kh_v = (double.Parse(textBox19.Text));
             metal_for_gear = comboBox9.SelectedItem.ToString();
             metal_for_wheel = comboBox8.SelectedItem.ToString();
             k_width = comboBox9.SelectedItem.ToString();
