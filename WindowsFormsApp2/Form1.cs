@@ -226,9 +226,9 @@ namespace WindowsFormsApp2
             /*----------------Вычисление 2.1)-------------*/
             /*Для шестрени */
             σn_limb = 2 * H1 + 70;
-            Nh_o1 = 30 * Math.Pow(σn_limb, 2.4);
-            Nh_e1 = 60 * n_z1 * (t1 * Math.Pow(P1, 3) + t2 * Math.Pow(P2, 3) + t3 * Math.Pow(P3, 3));
-            Kh_l = Math.Pow(Nh_o1 / Nh_e1, 0.166);
+            Nh_o1 = Math.Round(30 * Math.Pow(σn_limb, 2.4));
+            Nh_e1 = Math.Round(60 * n_z1 * (t1 * Math.Pow(P1, 3) + t2 * Math.Pow(P2, 3) + t3 * Math.Pow(P3, 3)));
+            Kh_l = Math.Round(Math.Pow(Nh_o1 / Nh_e1, 1 / 6));
             if (Kh_l >= 1)
             {
                 Kh_l = Kh_l;
@@ -239,7 +239,7 @@ namespace WindowsFormsApp2
             σn_limb2 = 2 * H2 + 70;
             Nh_o12 = Math.Round(30 * Math.Pow(σn_limb2, 2.4));
             Nh_e12 = Math.Round(Nh_e1 / U1_2);
-            Kh_l2 = Math.Round(Math.Pow(Nh_o12 / Nh_e12, 1 / 6), 2);
+            Kh_l2 = Math.Round(Math.Pow(Nh_o12 / Nh_e12, 1 / 6));
             if (Kh_l2 >= 1)
             {
                 Kh_l2 = Kh_l2; ;
@@ -315,8 +315,52 @@ namespace WindowsFormsApp2
             {
                 accuracy = "5" + " " + "для конической передачи";
             }
-
-
+            /*-------------Вывод----------*/
+            //2.1.1
+            label38.Text = "H1 =  " + H1 + "(НВ)";
+            label39.Text = "Sh =  " + 1.1;
+            label40.Text = "σn_limb =  " + σn_limb + "(мПА)";
+            label41.Text = "Nh_o1 =   " + Nh_o1;
+            label42.Text = "Nh_e1 = " + Nh_e1;
+            label44.Text = "Kh_l =  " + Kh_l;
+            label45.Text = "σ_H1 =  " + σ_H1 + "(мПА)";
+            //2.1.2
+            label46.Text = "H2 =  " + H2 + "(НВ)";
+            label47.Text = "Sh =  " + 1.1;
+            label48.Text = "σn_limb =  " + σn_limb2 + "(мПА)";
+            label50.Text = "Nh_o2 =   " + Nh_o12;
+            label51.Text = "Nh_e2 = " + Nh_e12;
+            label52.Text = "Kh_l =  " + Kh_l2;
+            label53.Text = "σ_H2 =  " + σ_H12 + "(мПА)";
+            label58.Text = min + "(мПА)";
+            //2.2
+            label49.Text = "Kh_alpha = " + Kh_alpha;
+            label55.Text = "Kh_betta = " + Kh_betta;
+            label59.Text = "Kh_v = " + Kh_v;
+            label60.Text = "Kh = " + Kh;
+            //2.3
+            label62.Text = "a = " + a + "(мм)";
+            //2.4
+            label65.Text = "m = " + m + "(мм)";
+            label66.Text = "z1 + z2 = " + z1_sum_z2;
+            //2.5
+            label86.Text = "z1 = " + z1;
+            label87.Text = "z2 = " + z2;
+            label88.Text = "U1_2f = " + U1_2f;
+            label89.Text = "delta = " + delta_U + "%" + "<2.5%";
+            //2.6
+            label91.Text = "b2 = b = " + b2 + "(мм)";
+            //2.7
+            label93.Text = "d1 =  " + d1 + "(мм)";
+            label94.Text = "d2 =  " + d2 + "(мм)";
+            label95.Text = "d_a1 =  " + d_a1 + "(мм)";
+            label96.Text = "d_a2 =   " + d_a2 + "(мм)";
+            label97.Text = "d_f1 = " + d_f1 + "(мм)";
+            label98.Text = "d_f2 =  " + d_f2 + "(мм)";
+            label70.Text = "Проверка : 1/2 * d1 + 1/2 * d2 = a " + verify + "=" + a;
+            //2.8
+            label100.Text = "V = " + V + "(м/c)";
+            label101.Text = "Степень точности зубчаты передач : " + accuracy;
 
         }
 

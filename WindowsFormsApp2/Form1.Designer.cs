@@ -155,6 +155,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label70 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -701,6 +702,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label70);
             this.tabPage2.Controls.Add(this.label101);
             this.tabPage2.Controls.Add(this.label100);
             this.tabPage2.Controls.Add(this.label99);
@@ -1478,6 +1480,15 @@
             this.tabPage6.Text = "tabPage6";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(489, 417);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(41, 13);
+            this.label70.TabIndex = 265;
+            this.label70.Text = "label70";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1625,6 +1636,7 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label70;
     }
 }
 
