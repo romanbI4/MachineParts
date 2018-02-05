@@ -1200,8 +1200,18 @@
             // 
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Items.AddRange(new object[] {
-            "Ременная передача",
-            "Муфта"});
+            " 0.1",
+            " 0.125",
+            " 0.16",
+            " 0.2",
+            " 0.25",
+            " 0.315",
+            " 0.4",
+            " 0.5",
+            " 0.630",
+            "0.8",
+            " 1",
+            " 1.25"});
             this.comboBox7.Location = new System.Drawing.Point(273, 430);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(121, 21);
@@ -1211,26 +1221,9 @@
             // 
             this.comboBox8.FormattingEnabled = true;
             this.comboBox8.Items.AddRange(new object[] {
-            "885",
-            "890",
-            "910",
-            "900",
-            "915",
-            "920",
-            "935",
-            "950",
-            "955",
-            "950",
-            "965",
-            "970",
-            "975",
-            "975",
-            "975",
-            "975",
-            "980",
-            "980",
-            "985",
-            "985"});
+            "40Х, 45, 40ХН",
+            "40Х, 40ХН, 35ХМ",
+            "20Х, 20ХНМ"});
             this.comboBox8.Location = new System.Drawing.Point(199, 402);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(121, 21);
@@ -1240,26 +1233,9 @@
             // 
             this.comboBox9.FormattingEnabled = true;
             this.comboBox9.Items.AddRange(new object[] {
-            "0,18",
-            "0,25",
-            "0,37",
-            "0,55",
-            "0,75",
-            "1,1",
-            "1,5",
-            "2,2",
-            "3,0",
-            "4,0",
-            "5,5",
-            "7,5",
-            "11",
-            "15",
-            "18,5",
-            "22,5",
-            "30",
-            "37",
-            "45",
-            "55"});
+            "40Х, 45, 40ХН",
+            "40Х, 40ХН, 35ХМ",
+            "20Х, 20ХНМ"});
             this.comboBox9.Location = new System.Drawing.Point(199, 366);
             this.comboBox9.Name = "comboBox9";
             this.comboBox9.Size = new System.Drawing.Size(121, 21);

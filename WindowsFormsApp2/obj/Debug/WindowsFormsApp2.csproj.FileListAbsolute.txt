@@ -17,3 +17,12 @@ C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного п
 C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
 C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
 C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form1.resources
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.GenerateResource.Cache
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
+F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb

@@ -6,17 +6,23 @@ namespace WindowsFormsApp2
 
     public partial class Form1 : Form
     {
-        //float _T, _n, _nu_sinh, _U, _n_rem_per, _n_pod, _n_zub;
-        //float _Tvuh, _Tpotr, _nu_obsh, _Upriv, _Ured, _U1_2, _P_z1, _P_z2, _P_vuh, _n_z1, _n_z2, _n_vuh, _T_z1, _T_z2, _T_vuh,
-        //    _P_sh1, _P_sh2, _n_sh1, _n_sh2, _T_sh1, _T_sh2;
-        //float _N_vhod, _power;
-        //string _select;//Из списка вытягиваем выбранное значение
-        public float T, n, nu_sinh, U,
+        
+        public double T, n, nu_sinh, U,
                n_rem_per, n_pod, n_zub;
-        public float Tvuh, Tpotr, nu_obsh, Upriv, Ured, U1_2, P_z1, P_z2, P_vuh, n_z1, n_z2, n_vuh, T_z1, T_z2, T_vuh,
+        public double Tvuh, Tpotr, nu_obsh, Upriv, Ured, U1_2, P_z1, P_z2, P_vuh, n_z1, n_z2, n_vuh, T_z1, T_z2, T_vuh,
            P_sh1, P_sh2, n_sh1, n_sh2, T_sh1, T_sh2;
-        public float N_vhod, power;
-        public string select;//Из списка вытягиваем выбранное значение
+        public double N_vhod, power;
+        public string select;
+        //Второй расчет
+        public double Kap = 9750;
+        public double t1, t2, t3;
+        public double P1, P2, P3;
+        public string metal_for_gear, metal_for_wheel;
+        public double Kh_alpha, Kh_betta, Kh_v;
+        public double H1, H2;
+        public double k, σn_limb, Nh_o1, Nh_e1, Kh_l, σ_H1, σn_limb2, Nh_o12, Nh_e12, Kh_l2, σ_H12, min, Kh, part2, a, a1, m,
+            z1_sum_z2, z1, z2, U1_2f, delta_U, b, b2, d1, d2, d_a1, d_a2, d_f1, d_f2, verify, V;
+        public string k_width,accuracy;
 
         public Form1()
         {
@@ -149,195 +155,177 @@ namespace WindowsFormsApp2
             Calculation();
         }
 
-        //public void Calculation1()
-        //{
-        //    /*----------------Считывание ввода-----------*/
-        //    float Kap = 9750;
-        //    int t1, t2, t3;
-        //    float P1, P2, P3;
-        //    string metal_for_gear = comboBox9.SelectedItem.ToString(), metal_for_wheel = comboBox8.SelectedItem.ToString();
-        //    float k_width = float.Parse(comboBox9.SelectedItem.ToString());
-        //    float Kh_alpha, Kh_betta, Kh_v;
-        //    int H1, H2;
-        //    double k;
-        //    switch (metal_for_gear) {
-        //        case metal_for_gear == '40Х, 45, 40ХН':
-        //            H1 = 280;
-        //            break;
-        //        case metal_for_gear == '40Х, 40ХН, 35ХМ':
-        //            H1 = 53;
-        //            break;
-        //        case metal_for_gear == '40Х, 40ХН, 35ХМ':
-        //            H1 = 52;
-        //            break;
-        //        case metal_for_gear == '20Х, 20ХНМ':
-        //            H1 = 60;
-        //            break;
-        //        case metal_for_gear == '20Х, 20ХНМ':
-        //            H1 = 61;
-        //            break;
-        //    }
-        //    switch (metal_for_wheel) {
-        //        case metal_for_gear == '40Х, 45, 40ХН':
-        //            H2 = 250;
-        //            break;
-        //        case metal_for_gear == '40Х, 40ХН, 35ХМ':
-        //            H2 = 280;
-        //            break;
-        //        case metal_for_gear == '40Х, 40ХН, 35ХМ':
-        //            H2 = 52;
-        //            break;
-        //        case metal_for_gear == '20Х, 20ХНМ':
-        //            H2 = 53;
-        //            break;
-        //        case metal_for_gear == '20Х, 20ХНМ':
-        //            H2 = 60;
-        //            break;
-        //    }
-        //    switch (k_width) {
-        //        case k_width == '0,1':
-        //            k = 0.1;
-        //            break;
-        //        case k_width == '0,125':
-        //            k = 0.125;
-        //            break;
-        //        case k_width == '0,16':
-        //            k = 0.16;
-        //            break;
-        //        case k_width == '0,2':
-        //            k = 0.2;
-        //            break;
-        //        case k_width == '0,25':
-        //            k = 0.25;
-        //            break;
-        //        case k_width == '0,315':
-        //            k = 0.315;
-        //            break;
-        //        case k_width == '0,4':
-        //            k = 0.4;
-        //            break;
-        //        case k_width == '0,5':
-        //            k = 0.5;
-        //            break;
-        //        case k_width == '0,630':
-        //            k = 0.630;
-        //            break;
-        //        case k_width == '0,8':
-        //            k = 0.8;
-        //            break;
-        //        case k_width == '1':
-        //            k = 1;
-        //            break;
-        //        case k_width == '1,25':
-        //            k = 1.25;
-        //            break;
-        //    }
-        //    /*---------------------------------------*/
-        //    /*----------------Вычисление 2.1)-------------*/
-        //    /*Для шестрени */
-        //    σn_limb = 2 * H1 + 70;
-        //    Nh_o1 = round(30 * pow(σn_limb, 2.4));
-        //    Nh_e1 = round(60 * n_z1 * (t1 * pow(P1, 3) + t2 * pow(P2, 3) + t3 * pow(P3, 3)));
-        //    Kh_l = round(pow(Nh_o1 / Nh_e1, 1 / 6), 2);
-        //    if (Kh_l >= 1) {
-        //        Kh_l = Kh_l;
-        //    }
-        //    else Kh_l = 1;
-        //    σ_H1 = round(((σn_limb / 1.1) * Kh_l));
-        //    /*Для колеса */
-        //    σn_limb2 = 2 * H2 + 70;
-        //    Nh_o12 = round(30 * pow(σn_limb2, 2.4));
-        //    Nh_e12 = round(Nh_e1 / U1_2);
-        //    Kh_l2 = round(pow(Nh_o12 / Nh_e12, 1 / 6), 2);
-        //    if (Kh_l2 >= 1) {
-        //        Kh_l2 = Kh_l2; ;
-        //    }
-        //    else Kh_l2 = 1;
-        //    σ_H12 = round(((σn_limb2 / 1.1) * Kh_l2));
-        //    min = min(σ_H1, σ_H12);
-        //    /******************************************/
-        //    /*----------------Вычисление 2.2)-------------*/
-        //    Kh = round(Kh_alpha * Kh_betta * Kh_v, 4);
-        //    /*----------------Вычисление 2.3)-------------*/
-        //    part2 = (P_z1 * Kh_betta * Kh_v * Kh_alpha) / (k * n_z1 * U1_2 * pow(min, 2));
-        //    a = Kap * (U1_2 + 1) * (round((pow(part2, 1 / 3)), 3));
-        //    if (a < a1) {
-        //        a = a1;
-        //    }
-        //    /*----------------Вычисление 2.4)-------------*/
-        //    m = 0.01 * a;
-        //    switch (m) {
-        //        case (m >= 1 && m < 1.25):
-        //            m = 1.25;
-        //            break;
-        //        case (m >= 1.125 && m < 1.375):
-        //            m = 1.3125;
-        //            break;
-        //        case (m >= 1.375 && m < 1.5):
-        //            m = 1.507;
-        //            break;
-        //        case (m >= 1.5 && m < 1.75):
-        //            m = 1.625;
-        //            break;
-        //    }
-        //    z1_sum_z2 = (2 * a) / m;
-        //    /*----------------Вычисление 2.5)-------------*/
-        //    z1 = round(z1_sum_z2 / (U1_2 + 1));
-        //    z2 = round(z1_sum_z2 - z1);
-        //    U1_2f = round((z2 / z1), 2);
-        //    delta_U = round((abs((U1_2 - U1_2f) / (U1_2)) * 100), 2);
-        //    /*----------------Вычисление 2.6)-------------*/
-        //    b = b2 = ceil(k * a);
-        //    /*----------------Вычисление 2.7)-------------*/
-        //    d1 = round(m * z1, 2);
-        //    d2 = round(m * z2, 2);
-        //    d_a1 = round(d1 + 2 * m, 2);
-        //    d_a2 = round(d2 + 2 * m, 2);
-        //    d_f1 = round(d1 - 2.5 * m, 2);
-        //    d_f2 = round(d2 - 2.5 * m, 2);
-        //    verify = (d1 / 2) + (d2 / 2);
-        //    /*----------------Вычисление 2.8)-------------*/
-        //    V = round((M_PI * d1 * n_z1) / 60000, 2);
-        //    /*----------------Определение точности)-------------*/
-        //    switch (V) {
-        //        /*//Цилиндрическая передача
-        //        case V>=15:
-        //        accuracy = '5A' . ' ' . 'для цилиндрической передачи';
-        //        break;
-        //        case V<15:
-        //        accuracy = '6A' . ' ' . 'для цилиндрической передачи';
-        //        break;
-        //        case V<10:
-        //        accuracy = '7A' . ' ' . 'для цилиндрической передачи';
-        //        break;
-        //        case V<6:
-        //        accuracy = '8A' . ' ' . 'для цилиндрической передачи';
-        //        break;
-        //        case V<2:
-        //        accuracy = '9A' . ' ' . 'для цилиндрической передачи';
-        //        break;*/
-        //        //Коническая передача
-        //        case (V < 1.5) && (V < 2):
-        //            accuracy = '9'. ' '. ' для конической передачи';
-        //            break;
-        //        case (V < 4) && (V < 6):
-        //            accuracy = '8'. ' '. ' для конической передачи';
-        //            break;
-        //        case (V < 8) && (V < 10):
-        //            accuracy = '7'. ' '. ' для конической передачи';
-        //            break;
-        //        case V <= (12) && (V < 15):
-        //            accuracy = '6'. ' '. ' для конической передачи';
-        //            break;
-        //        case (V >= 12) && (V >= 15):
-        //            accuracy = '5'. ' '. 'для конической передачи';
-        //            break;
-        //    }
-        //}
+        public void Calculation1()
+        {
+            /*----------------Считывание ввода-----------*/
+
+            switch (metal_for_gear)
+            {
+                case "40Х, 45, 40ХН":
+                    H1 = 280;
+                    break;
+                case "40Х, 40ХН, 35ХМ":
+                    H1 = 53;
+                    break;
+                case "20Х, 20ХНМ":
+                    H1 = 61;
+                    break;
+            }
+            switch (metal_for_wheel)
+            {
+                case "40Х, 45, 40ХН":
+                    H2 = 250;
+                    break;
+                case "40Х, 40ХН, 35ХМ":
+                    H2 = 52;
+                    break;
+                case "20Х, 20ХНМ":
+                    H2 = 60;
+                    break;
+            }
+            switch (k_width)
+            {
+                case "0.1":
+                    k = 0.1;
+                    break;
+                case "0,125":
+                    k = 0.125;
+                    break;
+                case "0,16":
+                    k = 0.16;
+                    break;
+                case "0,2":
+                    k = 0.2;
+                    break;
+                case "0,25":
+                    k = 0.25;
+                    break;
+                case "0,315":
+                    k = 0.315;
+                    break;
+                case "0,4":
+                    k = 0.4;
+                    break;
+                case "0,5":
+                    k = 0.5;
+                    break;
+                case "0,630":
+                    k = 0.630;
+                    break;
+                case "0,8":
+                    k = 0.8;
+                    break;
+                case "1":
+                    k = 1;
+                    break;
+                case "1,25":
+                    k = 1.25;
+                    break;
+            }
+            /*---------------------------------------*/
+            /*----------------Вычисление 2.1)-------------*/
+            /*Для шестрени */
+            σn_limb = 2 * H1 + 70;
+            Nh_o1 = 30 * Math.Pow(σn_limb, 2.4);
+            Nh_e1 = 60 * n_z1 * (t1 * Math.Pow(P1, 3) + t2 * Math.Pow(P2, 3) + t3 * Math.Pow(P3, 3));
+            Kh_l = Math.Pow(Nh_o1 / Nh_e1, 0.166);
+            if (Kh_l >= 1)
+            {
+                Kh_l = Kh_l;
+            }
+            else Kh_l = 1;
+            σ_H1 = Math.Round(((σn_limb / 1.1) * Kh_l));
+            /*Для колеса */
+            σn_limb2 = 2 * H2 + 70;
+            Nh_o12 = Math.Round(30 * Math.Pow(σn_limb2, 2.4));
+            Nh_e12 = Math.Round(Nh_e1 / U1_2);
+            Kh_l2 = Math.Round(Math.Pow(Nh_o12 / Nh_e12, 1 / 6), 2);
+            if (Kh_l2 >= 1)
+            {
+                Kh_l2 = Kh_l2; ;
+            }
+            else Kh_l2 = 1;
+            σ_H12 = Math.Round(((σn_limb2 / 1.1) * Kh_l2));
+            min = Math.Min(σ_H1, σ_H12);
+            /******************************************/
+            /*----------------Вычисление 2.2)-------------*/
+            Kh = Math.Round(Kh_alpha * Kh_betta * Kh_v, 4);
+            /*----------------Вычисление 2.3)-------------*/
+            part2 = (P_z1 * Kh_betta * Kh_v * Kh_alpha) / (k * n_z1 * U1_2 * Math.Pow(min, 2));
+            a = Kap * (U1_2 + 1) * (Math.Round((Math.Pow(part2, 1 / 3)), 3));
+            if (a < a1)
+            {
+                a = a1;
+            }
+            /*----------------Вычисление 2.4)-------------*/
+            m = 0.01 * a;
+            if (m >= 1 && m < 1.25)
+            {
+                m = 1.25;
+            }
+            if (m >= 1.125 && m < 1.375)
+            {
+                m = 1.3125;
+            }
+            if (m >= 1.375 && m < 1.5)
+            {
+                m = 1.507;
+            }
+            if (m >= 1.5 && m < 1.75)
+            {
+                m = 1.625;
+            }
+            z1_sum_z2 = (2 * a) / m;
+            /*----------------Вычисление 2.5)-------------*/
+            z1 = Math.Round(z1_sum_z2 / (U1_2 + 1));
+            z2 = Math.Round(z1_sum_z2 - z1);
+            U1_2f = Math.Round((z2 / z1), 2);
+            delta_U = Math.Round((Math.Abs((U1_2 - U1_2f) / (U1_2)) * 100), 2);
+            /*----------------Вычисление 2.6)-------------*/
+            b = b2 = Math.Ceiling(k * a);
+            /*----------------Вычисление 2.7)-------------*/
+            d1 = Math.Round(m * z1, 2);
+            d2 = Math.Round(m * z2, 2);
+            d_a1 = Math.Round(d1 + 2 * m, 2);
+            d_a2 = Math.Round(d2 + 2 * m, 2);
+            d_f1 = Math.Round(d1 - 2.5 * m, 2);
+            d_f2 = Math.Round(d2 - 2.5 * m, 2);
+            verify = (d1 / 2) + (d2 / 2);
+            /*----------------Вычисление 2.8)-------------*/
+            V = Math.Round((Math.PI * d1 * n_z1) / 60000, 2);
+            /*----------------Определение точности)-------------*/
+            //Коническая передача
+            if (V < 1.5 && V < 2)
+            {
+                accuracy = "9" + " " + " для конической передачи";
+            }
+            if (V < 4 && V < 6)
+            {
+                accuracy = "8" + " " + " для конической передачи";
+            }
+            if (V < 8 && V < 10)
+            {
+                accuracy = "7" + " " + " для конической передачи";
+            }
+            if (V <= 12 && V < 15)
+            {
+                accuracy = "6" + " " + " для конической передачи";
+            }
+            if (V >= 12 && V >= 15)
+            {
+                accuracy = "5" + " " + "для конической передачи";
+            }
+
+
+
+        }
 
         private void Расчет1_Click(object sender, EventArgs e)
         {
-            //Calculation();
+            metal_for_gear = comboBox9.SelectedItem.ToString();
+            metal_for_wheel = comboBox8.SelectedItem.ToString();
+            k_width = comboBox9.SelectedItem.ToString();
+            Calculation1();
         }
 
     }
@@ -353,189 +341,19 @@ namespace WindowsFormsApp2
 
 
 
-
-//public float T
-//{
-//    get { return _T; }
-//    set { _T = (float.Parse(textBox1.Text)); }
-//}
-
-//public float n
-//{
-//    get { return _n; }
-//    set { _n = (float.Parse(textBox2.Text)); }
-//}
-
-//public float nu_sinh
-//{
-//    get { return _nu_sinh; }
-//    set { _nu_sinh = (float.Parse(textBox3.Text)); }
-//}
-
-//public float U
-//{
-//    get { return _U; }
-//    set { _U = (float.Parse(textBox4.Text)); }
-//}
-
-//public float n_rem_per
-//{
-//    get { return _n_rem_per; }
-//    set { _n_rem_per = (float.Parse(textBox5.Text)); }
-//}
-
-//public float n_pod
-//{
-//    get { return _n_pod; }
-//    set { _n_pod = (float.Parse(textBox6.Text)); }
-//}
-
-//public float n_zub
-//{
-//    get { return _n_zub; }
-//    set { _n_zub = (float.Parse(textBox7.Text)); }
-//}
-
-//public float Tvuh
-//{
-//    get { return _Tvuh; }
-//    set { _Tvuh = value; }
-//}
-
-//public float Tpotr
-//{
-//    get { return _Tpotr; }
-//    set { _Tpotr = value; }
-//}
-
-//public float nu_obsh
-//{
-//    get { return _nu_obsh; }
-//    set { _nu_obsh = value; }
-//}
-
-//public float Upriv
-//{
-//    get { return _Upriv; }
-//    set { _Upriv = value; }
-//}
-
-//public float Ured
-//{
-//    get { return _Ured; }
-//    set { _Ured = value; }
-//}
-
-//public float U1_2
-//{
-//    get { return _U1_2; }
-//    set { _U1_2 = value; }
-//}
-
-//public float P_z1
-//{
-//    get { return _P_z1; }
-//    set { _P_z1 = value; }
-//}
-
-//public float P_z2
-//{
-//    get { return _P_z2; }
-//    set { _P_z2 = value; }
-//}
-
-//public float P_vuh
-//{
-//    get { return _P_vuh; }
-//    set { _P_vuh = value; }
-//}
-
-//public float n_z1
-//{
-//    get { return _n_z1; }
-//    set { _n_z1 = value; }
-//}
-
-//public float n_z2
-//{
-//    get { return _n_z2; }
-//    set { _n_z2 = value; }
-//}
-
-//public float n_vuh
-//{
-//    get { return _n_vuh; }
-//    set { _n_vuh = value; }
-//}
-
-//public float T_z1
-//{
-//    get { return _T_z1; }
-//    set { _T_z1 = value; }
-//}
-
-//public float T_z2
-//{
-//    get { return _T_z2; }
-//    set { _T_z2 = value; }
-//}
-
-//public float T_vuh
-//{
-//    get { return _T_vuh; }
-//    set { _T_vuh = value; }
-//}
-
-//public float P_sh1
-//{
-//    get { return _P_sh1; }
-//    set { _P_sh1 = value; }
-//}
-
-//public float P_sh2
-//{
-//    get { return _P_sh2; }
-//    set { _P_sh2 = value; }
-//}
-
-//public float n_sh1
-//{
-//    get { return _n_sh1; }
-//    set { _n_sh1 = value; }
-//}
-
-//public float n_sh2
-//{
-//    get { return _n_sh2; }
-//    set { _n_sh2 = value; }
-//}
-
-//public float T_sh1
-//{
-//    get { return _T_sh1; }
-//    set { _T_sh1 = value; }
-//}
-
-//public float T_sh2
-//{
-//    get { return _T_sh2; }
-//    set { _T_sh2 = value; }
-//}
-
-//public float N_vhod
-//{
-//    get { return _N_vhod; }
-//    set { _N_vhod = float.Parse(comboBox2.SelectedItem.ToString()); }
-//}
-
-//public float power
-//{
-//    get { return _power; }
-//    set { _power = float.Parse(comboBox1.SelectedItem.ToString()); }
-//}
-
-//public string select
-//{
-//    get { return _select; }
-//    set { _select = comboBox3.SelectedItem.ToString(); }
-//}
+/*//Цилиндрическая передача
+               case V>=15:
+               accuracy = '5A' . ' ' . 'для цилиндрической передачи';
+               break;
+               case V<15:
+               accuracy = '6A' . ' ' . 'для цилиндрической передачи';
+               break;
+               case V<10:
+               accuracy = '7A' . ' ' . 'для цилиндрической передачи';
+               break;
+               case V<6:
+               accuracy = '8A' . ' ' . 'для цилиндрической передачи';
+               break;
+               case V<2:
+               accuracy = '9A' . ' ' . 'для цилиндрической передачи';
+               break;*/
