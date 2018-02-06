@@ -9,8 +9,8 @@ namespace WindowsFormsApp2
         //Первый расчет
         public double T, n, nu_sinh, U,
                n_rem_per, n_pod, n_zub;
-        public double Tvuh, Tpotr, nu_obsh, Upriv, Ured, U1_2, P_z1, P_z2, P_vuh, n_z1, n_z2, n_vuh, T_z1, T_z2, T_vuh,
-           P_sh1, P_sh2, n_sh1, n_sh2, T_sh1, T_sh2;
+        public double Tvuh, Tpotr, nu_obsh, Upriv, Ured, U1_2, P_z1, P_z2, P_vuh, n_z1, n_z2,
+            n_vuh, T_z1, T_z2, T_vuh, P_sh1, P_sh2, n_sh1, n_sh2, T_sh1, T_sh2;
         public double N_vhod, power;
         public string select;
         //Второй расчет
@@ -20,9 +20,13 @@ namespace WindowsFormsApp2
         public string metal_for_gear, metal_for_wheel;
         public double Kh_alpha, Kh_betta, Kh_v;
         public double H1, H2;
-        public double k, σn_limb, Nh_o1, Nh_e1, Kh_l, σ_H1, σn_limb2, Nh_o12, Nh_e12, Kh_l2, σ_H12, min, Kh, part2, a, a1, m,
-            z1_sum_z2, z1, z2, U1_2f, delta_U, b, b2, d1, d2, d_a1, d_a2, d_f1, d_f2, verify, V;
-        public string k_width,accuracy;
+        public double k, σn_limb, Nh_o1, Nh_e1, Kh_l, σ_H1, σn_limb2, Nh_o12, Nh_e12, Kh_l2,
+            σ_H12, min, Kh, part2, a, a1, m, z1_sum_z2, z1, z2, U1_2f, delta_U, b, b2, d1, d2,
+            d_a1, d_a2, d_f1, d_f2, verify, V;
+        public string k_width, accuracy;
+        //Третий расчет
+        public double Y_fi, Tmax, P_edr, P_podr, sigma_t;
+        public string S_h;
 
         public Form1()
         {
@@ -149,7 +153,7 @@ namespace WindowsFormsApp2
             n_rem_per = (double.Parse(textBox5.Text));
             n_pod = (double.Parse(textBox6.Text));
             n_zub = (double.Parse(textBox7.Text));
-            N_vhod = double.Parse(comboBox2.SelectedItem.ToString()); 
+            N_vhod = double.Parse(comboBox2.SelectedItem.ToString());
             power = double.Parse(comboBox1.SelectedItem.ToString());
             select = comboBox3.SelectedItem.ToString();//Из списка вытягиваем выбранное значение
             Calculation();
@@ -252,7 +256,8 @@ namespace WindowsFormsApp2
             /*----------------Вычисление 2.3)-------------*/
             part2 = (P_z1 * Kh_betta * Kh_v * Kh_alpha) / (k * n_z1 * U1_2 * Math.Pow(min, 2));
             a = Kap * (U1_2 + 1) * (Math.Round((Math.Pow(part2, 1 / 3)), 3));
-            if (a >= 103.545) {
+            if (a >= 103.545)
+            {
                 a = 105;
             }
             /*----------------Вычисление 2.4)-------------*/
@@ -382,6 +387,129 @@ namespace WindowsFormsApp2
             Calculation1();
         }
 
+        public void Calculation2()
+        {
+
+            /*----------------Вычисление 3.1)------------*/
+            //$E_a = round(1.88 - 3.2 * ((1 / $z_3) + (1 / $z_4)),2);
+            //$Z_e = round(sqrt((4 - $E_a) / 3),2);
+            //$sigma_n = round( Z_m * Z_h * $Z_e * (1 / $d_3)* sqrt((2000*9550 * $Pz1 * $Kh_alpha * $Kh_betta * $Kh_v * ($U1_2_f + 1))/($n1 * $b2 * $U1_2_f)),2);
+            //if ($sigma_n <= $sigma_solve) {
+            //    $verify3_1 = "$sigma_n < $sigma_solve" . "<br>" . 'Проверка пройдена';
+            //} else $verify3_1 =  "$sigma_n > $sigma_solve" . "<br>" . 'Ошибка';
+            ///*--------------------------------------------*/
+
+            ///*----------------Вычисление 3.2)-------------*/
+            ///*----------------Для шестерни----------------*/
+            //$sigma_f_limb1 = 1.8 * $H_hb1;
+            //$N_fe1 = 60 * $n1 * ($t1 * pow($P1, 6) + $t2 * pow($P2, 6) + $t3 * pow($P3, 6));
+            //$K_fl = pow((N_f0 / $N_fe1), 1 / m);
+            //if($K_fl > 1) {
+            //    $K_fl = $K_fl;
+            //}
+            //else {
+            //    $K_fl = 1;
+            //}
+            //$sigma_f1 = round(($sigma_f_limb1 / $s_f),1);
+            ///*----------------Для колеса----------------*/
+            //$sigma_f_limb2 = 1.8 * $H_hb2;
+            //$N_fe2 = $N_fe1 / $U1_2_f ;
+            //$K_fl = pow((N_f0 / $N_fe2), 1 / m);
+            //if($K_fl > 1) {
+            //    $K_fl = $K_fl;
+            //}
+            //else {
+            //    $K_fl = 1;
+            //}
+            //$sigma_f2 = round(($sigma_f_limb2 / $s_f),1);
+            //switch ($z_3) {
+            // case (17<=$z_3 || $z_3=19) :
+            // $Y_f1 = 4.28;
+            // break;
+            // case (20<=$z_3 || $z_3<=24) :
+            // $Y_f1 = 4.09;
+            // break;
+            // case (25<=$z_3 || $z_3<=29) :
+            // $Y_f1 = 3.9;
+            // break;
+            // case (30<=$z_3 || $z_3<=39) :
+            // $Y_f1 = 3.8;
+            // break;
+            // case (40<=$z_3 || $z_3<=49) :
+            // $Y_f1 = 3.7;
+            // break;
+            // case (50<=$z_3 || $z_3<=59) :
+            // $Y_f1 = 3.65;
+            // break;
+            // case (60<=$z_3 || $z_3<=79) :
+            // $Y_f1 = 3.62;
+            // break;
+            // case (80<=$z_3 || $z_3<100) :
+            // $Y_f1 = 3.61;
+            // break;
+            // case ($z_3>=100) :
+            // $Y_f1 = 3.6;
+            // break;
+            //}
+            //$verify3_2_1 = $sigma_f1 / $Y_f1;
+            //switch ($z_4) {
+            //    case (17<=$z_4 || $z_4<=19) :
+            //    $Y_f2 = 4.28;
+            //    break;
+            //    case (20<=$z_4 || $z_4<=24) :
+            //    $Y_f2 = 4.09;
+            //    break;
+            //    case (25<=$z_4 || $z_4<=29) :
+            //    $Y_f2 = 3.9;
+            //    break;
+            //    case (30<=$z_4 || $z_4<=39) :
+            //    $Y_f2 = 3.8;
+            //    break;
+            //    case (40<=$z_4 || $z_4<=49) :
+            //    $Y_f2 = 3.7;
+            //    break;
+            //    case (50<=$z_4 || $z_4<=59) :
+            //    $Y_f2 = 3.65;
+            //    break;
+            //    case (60<=$z_4 || $z_4<=79) :
+            //    $Y_f2 = 3.62;
+            //    break;
+            //    case (80<=$z_4 || $z_4<100) :
+            //    $Y_f2 = 3.61;
+            //    break;
+            //    case ($z_4>=100) :
+            //    $Y_f2 = 3.6;
+            //    break;
+            //}
+            //$verify3_2_2 = $sigma_f2 / $Y_f2;
+            //if ($verify3_2_1 > $verify3_2_2) {
+            //    $sigma_f1_1 = $Y_f2 * ((2000 * 9550 * $Pz1 * $Kf_alpha * $Kf_betta * $Kf_v)/(m * $b2 * $d_3 * $sigma_f2));
+            //    $verify3_2_2 = "$sigma_f1_1 < $sigma_f1" . "<br>" . 'Проверка пройдена';
+            //}
+            //else {
+            //    $sigma_f1_1 = $Y_f1 * ((2000 * 9550 * $Pz1 * $Kf_alpha * $Kf_betta * $Kf_v)/(m * $b2 * $d_3 * $z_4));
+            //}
+            ///*---------------------------------------------*/
+
+            ///*----------------Вычисление 3.3)-------------*/
+            //$k_per = round(($T_max) * ($P_ed / $P_potr),2);
+            //$sigma_n_max = round($sigma_n * sqrt($k_per),1);
+            //$sigma_n_max1 = 2.8 * $sigma_t;
+            //if ($sigma_n_max <= $sigma_n_max1) {
+            //    $verify3_3 = "$sigma_n_max < $sigma_n_max1" . "<br>" . 'Проверка пройдена';
+            //} else $verify3_3 = 'Ошибка';
+            ///*---------------------------------------------*/
+
+            ///*----------------Вычисление 3.4)-------------*/
+            //$sigma_f_max = round($sigma_f1_1 * $k_per,1);
+            //$sigma_f_max1 = 2.75 * $H_hb2;
+            //if ($sigma_f_max <= $sigma_f_max1) {
+            //    $verify3_4 = "$sigma_f_max < $sigma_f_max1" . "<br>" . 'Проверка пройдена';
+            //} else $verify3_4 = 'Ошибка';
+            ///*---------------------------------------------*/
+            //        }
+            //    }
+        }
     }
 }
 
