@@ -1260,17 +1260,17 @@
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Items.AddRange(new object[] {
             " 0,1",
-            " 0.125",
-            " 0.16",
-            " 0.2",
-            " 0.25",
-            " 0.315",
-            " 0.4",
-            " 0.5",
-            " 0.630",
-            "0.8",
+            " 0,125",
+            " 0,16",
+            " 0,2",
+            " 0,25",
+            " 0,315",
+            " 0,4",
+            " 0,5",
+            " 0,630",
+            " 0,8",
             " 1",
-            " 1.25"});
+            " 1,25"});
             this.comboBox7.Location = new System.Drawing.Point(273, 430);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(121, 21);

@@ -25,3 +25,4 @@ F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного п
 F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
 F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
 F:\ROMA\УЧЕБА ALL\academy\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb
+C:\Users\vdovr\Desktop\ACADEMY\Технологія комп'ютерного проектування(к.р.)\Курсач\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csprojResolveAssemblyReference.cache

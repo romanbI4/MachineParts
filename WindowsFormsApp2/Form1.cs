@@ -191,22 +191,20 @@ namespace WindowsFormsApp2
             Nh_o1 = Math.Round(30 * Math.Pow(σn_limb, 2.4));
             Nh_e1 = Math.Round(60 * n_z1 * (t1 * Math.Pow(P1, 3) + t2 * Math.Pow(P2, 3) + t3 * Math.Pow(P3, 3)));
             Kh_l = Math.Round(Math.Pow(Nh_o1 / Nh_e1, 1 / 6));
-            if (Kh_l >= 1)
+            if (Kh_l <= 1)
             {
-                Kh_l = Kh_l;
+                Kh_l = 1;
             }
-            else Kh_l = 1;
             σ_H1 = Math.Round(((σn_limb / 1.1) * Kh_l));
             /*Для колеса */
             σn_limb2 = 2 * H2 + 70;
             Nh_o12 = Math.Round(30 * Math.Pow(σn_limb2, 2.4));
             Nh_e12 = Math.Round(Nh_e1 / U1_2);
             Kh_l2 = Math.Round(Math.Pow(Nh_o12 / Nh_e12, 1 / 6));
-            if (Kh_l2 >= 1)
+            if (Kh_l2 <= 1)
             {
-                Kh_l2 = Kh_l2; ;
+                Kh_l2 = 1;
             }
-            else Kh_l2 = 1;
             σ_H12 = Math.Round(((σn_limb2 / 1.1) * Kh_l2));
             min = Math.Min(σ_H1, σ_H12);
             /******************************************/
@@ -280,7 +278,6 @@ namespace WindowsFormsApp2
             {
                 accuracy = "5" + " " + "/nдля конической передачи";
             }
-
             /*-------------Вывод----------*/
             //2.1.1
             label38.Text = "H1 =  " + H1 + "(НВ)";
@@ -354,21 +351,18 @@ namespace WindowsFormsApp2
             E_a = Math.Round(1.88 - 3.2 * ((1 / z1) + (1 / z2)),2);
             Z_h = Math.Sqrt(2 / Math.Sin(2 * 20));
             Z_e = Math.Round(Math.Sqrt((4 - E_a) / 3),2);
-            sigma_n = Math.Round(Z_m * Z_h * Z_e * (1 / d1) * Math.Sqrt((2000 * 9550 * P_z1 * Kh_alpha * Kh_betta * Kh_v * (U1_2f + 1)) / (n * b * U1_2f)),2);
-            if (sigma_n <= sigma_solve) {
-                verify3_1 = "sigma_n" + "<" + "sigma_solve" + "Проверка пройдена";
-            } else verify3_1 = "sigma_n > sigma_solve" + "Ошибка";
+            sigma_n = Math.Round(Z_m * Z_h * Z_e * (1 / d1) * Math.Sqrt((2000 * 9550 * P_z1 * Kh_alpha * Kh_betta * Kh_v * (U1_2f + 1)) / (n_z1 * b * U1_2f)),2);
+            if (sigma_n <= min) {
+                verify3_1 = sigma_n + "<" + min + "Проверка пройдена";
+            } else verify3_1 = sigma_n + ">" + min + "Ошибка";
             /*--------------------------------------------*/
 
             /*----------------Вычисление 3.2)-------------*/
             /*----------------Для шестерни----------------*/
             sigma_f_limb1 = 1.8 * H1;
-            N_fe1 = 60 * n * (t1 * Math.Pow(P1, 6) + t2 * Math.Pow(P2, 6) + t3 * Math.Pow(P3, 6));
+            N_fe1 = 60 * n_z1 * (t1 * Math.Pow(P1, 6) + t2 * Math.Pow(P2, 6) + t3 * Math.Pow(P3, 6));
             K_fl = Math.Pow((N_f0 / N_fe1), 1 / m);
-            if (K_fl > 1) {
-                K_fl = K_fl;
-            }
-            else {
+            if (K_fl <= 1) {
                 K_fl = 1;
             }
             switch (S_h)
@@ -385,10 +379,7 @@ namespace WindowsFormsApp2
             sigma_f_limb2 = 1.8 * H2;
             N_fe2 = N_fe1 / U1_2f;
             K_fl = Math.Pow((N_f0 / N_fe2), 1 / m);
-            if (K_fl > 1) {
-                K_fl = K_fl;
-            }
-            else {
+            if (K_fl <= 1) {
                 K_fl = 1;
             }
             sigma_f2 = Math.Round((sigma_f_limb2 / s_f),1);
@@ -459,8 +450,8 @@ namespace WindowsFormsApp2
             }
             verify3_2_2 = sigma_f2 / Y_f2;
             if (verify3_2_1 > verify3_2_2) {
-                sigma_f1_1 = Y_f2 * ((2000 * 9550 * P_z1 * Kf_alpha * Kf_betta * Kf_v)/ (m * b2 * d1 * sigma_f2));
-                verify3_2_2_2 = "sigma_f1_1 < sigma_f1" + "Проверка пройдена";
+                sigma_f1_1 = Y_f2 * ((2000 * 9550 * P_z2 * Kf_alpha * Kf_betta * Kf_v)/ (m * b2 * d2 * n_z2));
+                verify3_2_2_2 = sigma_f1_1 + "<" + sigma_f1 + "Проверка пройдена";
             }
             else {
                 sigma_f1_1 = Y_f1 * ((2000 * 9550 * P_z1 * Kf_alpha * Kf_betta * Kf_v)/ (m * b2 * d1 * z2));
@@ -472,7 +463,7 @@ namespace WindowsFormsApp2
             sigma_n_max = Math.Round(sigma_n * Math.Sqrt(k_per),1);
             sigma_n_max1 = 2.8 * sigma_t;
             if (sigma_n_max <= sigma_n_max1) {
-                verify3_3 = "sigma_n_max < sigma_n_max1" + "Проверка пройдена";
+                verify3_3 = sigma_n_max + "<" + sigma_n_max1 + "Проверка пройдена";
             } else verify3_3 = "Ошибка";
             /*---------------------------------------------*/
 
@@ -480,7 +471,7 @@ namespace WindowsFormsApp2
             sigma_f_max = Math.Round(sigma_f1_1 * k_per,1);
             sigma_f_max1 = 2.75 * H2;
             if (sigma_f_max <= sigma_f_max1) {
-                verify3_4 = "sigma_f_max < sigma_f_max1" + "Проверка пройдена";
+                verify3_4 = sigma_f_max + "<" + sigma_f_max1 + "Проверка пройдена";
             } else verify3_4 = "Ошибка";
             /*---------------------------------------------*/
 
