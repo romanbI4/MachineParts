@@ -183,45 +183,7 @@ namespace WindowsFormsApp2
                     H2 = 60;
                     break;
             }
-            switch (k_width)
-            {
-                case "0.1":
-                    k = 0.1;
-                    break;
-                case "0,125":
-                    k = 0.125;
-                    break;
-                case "0,16":
-                    k = 0.16;
-                    break;
-                case "0,2":
-                    k = 0.2;
-                    break;
-                case "0,25":
-                    k = 0.25;
-                    break;
-                case "0,315":
-                    k = 0.315;
-                    break;
-                case "0,4":
-                    k = 0.4;
-                    break;
-                case "0,5":
-                    k = 0.5;
-                    break;
-                case "0,630":
-                    k = 0.630;
-                    break;
-                case "0,8":
-                    k = 0.8;
-                    break;
-                case "1":
-                    k = 1;
-                    break;
-                case "1,25":
-                    k = 1.25;
-                    break;
-            }
+            k = double.Parse(k_width);
             /*---------------------------------------*/
             /*----------------Вычисление 2.1)-------------*/
             /*Для шестрени */
@@ -282,7 +244,8 @@ namespace WindowsFormsApp2
             U1_2f = Math.Round((z2 / z1), 2);
             delta_U = Math.Round((Math.Abs((U1_2 - U1_2f) / (U1_2)) * 100), 2);
             /*----------------Вычисление 2.6)-------------*/
-            b = b2 = k * a;
+            b2 = k * a;
+            b = b2;
             /*----------------Вычисление 2.7)-------------*/
             d1 = Math.Round(m * z1, 2);
             d2 = Math.Round(m * z2, 2);
@@ -380,7 +343,7 @@ namespace WindowsFormsApp2
             Kh_v = (double.Parse(textBox19.Text));
             metal_for_gear = comboBox9.SelectedItem.ToString();
             metal_for_wheel = comboBox8.SelectedItem.ToString();
-            k_width = comboBox9.SelectedItem.ToString();
+            k_width = comboBox7.SelectedItem.ToString();
             Calculation1();
         }
 
@@ -391,7 +354,7 @@ namespace WindowsFormsApp2
             E_a = Math.Round(1.88 - 3.2 * ((1 / z1) + (1 / z2)),2);
             Z_h = Math.Sqrt(2 / Math.Sin(2 * 20));
             Z_e = Math.Round(Math.Sqrt((4 - E_a) / 3),2);
-            sigma_n = Math.Round(Z_m * Z_h * Z_e * (1 / d1) * Math.Sqrt((2000 * 9550 * P_z1 * Kh_alpha * Kh_betta * Kh_v * (U1_2_f + 1)) / (n * b * U1_2_f)),2);
+            sigma_n = Math.Round(Z_m * Z_h * Z_e * (1 / d1) * Math.Sqrt((2000 * 9550 * P_z1 * Kh_alpha * Kh_betta * Kh_v * (U1_2f + 1)) / (n * b * U1_2f)),2);
             if (sigma_n <= sigma_solve) {
                 verify3_1 = "sigma_n" + "<" + "sigma_solve" + "Проверка пройдена";
             } else verify3_1 = "sigma_n > sigma_solve" + "Ошибка";
@@ -420,7 +383,7 @@ namespace WindowsFormsApp2
             sigma_f1 = Math.Round((sigma_f_limb1 / s_f),1);
             /*----------------Для колеса----------------*/
             sigma_f_limb2 = 1.8 * H2;
-            N_fe2 = N_fe1 / U1_2_f;
+            N_fe2 = N_fe1 / U1_2f;
             K_fl = Math.Pow((N_f0 / N_fe2), 1 / m);
             if (K_fl > 1) {
                 K_fl = K_fl;

@@ -1259,7 +1259,7 @@
             // 
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Items.AddRange(new object[] {
-            " 0.1",
+            " 0,1",
             " 0.125",
             " 0.16",
             " 0.2",
