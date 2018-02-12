@@ -24,6 +24,11 @@ namespace WindowsFormsApp2
             k_per, sigma_n_max, sigma_f_max, sigma_f_max1, sigma_n_max1, Y_f1, Y_f2, 
             verify3_2_1, verify3_2_2;
         public string S_h, verify3_4, verify3_3, verify3_1, verify3_2_2_2;
+        //Четвертый расчет
+        public double K_nu = 1.6, K_tao = 1.4, K_sigma = 1.5, K_tao_d = 0.7, K_sigma_b = 0.81,
+            d, d3, d4,d5, l1 ,l2, P_tabl = 2, sigma_b = 400, F_t1, F_t2, F_r1, F_r2, R_a1, R_a2, sigma_sk1, sigma_sk2, tao_kr11, tao_kr12,
+            sigma_minus_1, tao_minus_1, K_sigma_d, P_sigma_1, P_sigma_2, P_tao_11, P_tao_12, P11, P12;
+        public string result1, result2;
 
         public Form1()
         {
@@ -521,6 +526,142 @@ namespace WindowsFormsApp2
             Calculation2();
         }
 
+        public void Calculation3()
+        {
+
+            F_t1 = (2 * T_z1) / (d1 * 0.001);
+            F_t2 = (2 * T_z2) / (d_a2 * 0.001);
+            F_r1 = F_t1 * 0.363970;
+            F_r2 = F_t2 * 0.363970;
+            R_a1 = Math.Pow(((Math.Pow(F_r1, 2)) + (Math.Pow(F_t1, 2))),0.5);
+            R_a2 = Math.Pow(((Math.Pow(F_r2, 2)) + (Math.Pow(F_t2, 2))), 0.5);
+            /*-------------------------------------------------------*/
+            /*----------------ПРОВЕРКА ДИАМЕТРОВ для 2-х колес------------*/
+            d2 = 130 * Math.Pow((P_potr / n_z1), 0.333333);
+            d4 = 130 * Math.Pow((P_potr / n_z2), 0.333333);
+            if (d2 >= 20 && d2 < 40)
+            {
+                d = 35;
+            }
+            if (d2 >= 40 && d2 < 50)
+            {
+                d = 45;
+            }
+            if (d2 >= 50 && d2 < 60)
+            {
+                d = 55;
+            }
+            if (d2 >= 60 && d2 < 70)
+            {
+                d = 65;
+            }
+            if (d2 >= 70 && d2 < 80)
+            {
+                d = 75;
+            }
+            if (d2 >= 80 && d2 < 90)
+            {
+                d = 85;
+            }
+            if (d2 >= 90 && d2 < 100)
+            {
+                d = 95;
+            }
+
+            if (d4 >= 30 && d4 < 40){
+                    d5 = 35;
+            }
+            if (d4 >= 40 && d4 < 50){
+                    d5 = 45;
+            }
+            if (d4 >= 50 && d4 < 60){
+                    d5 = 55;
+            }
+            if (d4 >= 60 && d4 < 70){
+                    d5 = 65;
+            }
+            if (d4 >= 70 && d4 < 80){
+                    d5 = 75;
+            }
+            if (d4 >= 80 && d4 < 90){
+                    d5 = 85;
+            }
+            if (d4 >= 90 && d4 < 100){
+                    d5 = 95;
+            }
+            /*----------------Вычисление для 1-го колеса)------------*/
+            tao_kr11 = T_z1 / (0.2 * Math.Pow(d, 3) * Math.Pow(10, -3));
+            sigma_sk1 = (R_a1 * ((l1 + l2) / 2)) / (0.1 * Math.Pow(d, 3));
+            /*-------------------------------------------------------*/
+            /*----------------Вычисление для 2-го колеса)------------*/
+            tao_kr12 = T_z2 / (0.2 * Math.Pow(d5, 3) * Math.Pow(10, -3));
+            sigma_sk2 = (R_a2 * ((l1 + l2) / 2)) / (0.1 * Math.Pow(d5, 3));
+            /*-------------------------------------------------------*/
+            /*----------------Общие вычисления для 2-х колес------------*/
+            sigma_minus_1 = 0.55 * sigma_b;
+            tao_minus_1 = 0.6 * sigma_minus_1;
+            K_sigma_d = (1 / K_nu) * ((K_sigma / K_sigma_b) * (Kh_betta + 1));
+            /*-------------------------------------------------------*/
+            /*----------------Вычисление для 1-го колеса)------------*/
+            P_sigma_1 = sigma_minus_1 / (K_sigma_d * sigma_sk1);
+            P_tao_11 = tao_minus_1 / (K_tao_d * tao_kr11);
+            P11 = (P_sigma_1 * P_tao_11) / (Math.Sqrt(Math.Pow(P_sigma_1, 2) + Math.Pow(P_tao_11, 2)));
+            /*-------------------------------------------------------*/
+            /*----------------Вычисление для 2-го колеса)------------*/
+            P_sigma_2 = sigma_minus_1 / (K_sigma_d * sigma_sk2);
+            P_tao_12 = tao_minus_1 / (K_tao_d * tao_kr12);
+            P12 = (P_sigma_2 * P_tao_12) / (Math.Sqrt(Math.Pow(P_sigma_2, 2) + Math.Pow(P_tao_12, 2)));
+            /*-------------------------------------------------------*/
+            if (P11 >= P_tabl)
+            {
+                result1 = "Все посчитано верно,d1 = " + d;
+            }
+            else result1 = "Все посчитано не верно";
+            if (P12 >= P_tabl)
+            {
+                result2 = "Все посчитано верно,d2 = " + d5;
+            }
+            else result2 = "Все посчитано не верно";
+            /****************ВЫВОД**//////////////
+            //для 1-го колеса
+            label171.Text = "Ft_1 =  " + F_t1;
+            label170.Text = "Ft_2 =  " + F_t2;
+            label169.Text = "Fr_1 =  " + F_r1;
+            label168.Text = "Fr_2 =   " + F_r2;
+            label167.Text = "R_a1 = " + R_a1;
+            label166.Text = "sigma_k1 =  " + sigma_sk1;
+            label165.Text = "tao_kr11 =  " + tao_kr11;
+            label120.Text = "sigma_minus_1: =  " + sigma_minus_1;
+            label162.Text = "tao_minus_1 =  " + tao_minus_1;
+            label163.Text = "K_sigma_d =  " + K_sigma_d;
+            label158.Text = "P_sigma_1 =  " + P_sigma_1;
+            label159.Text = "P_tao_11 =   " + P_tao_11;
+            label160.Text = "P11 = " + P11;
+            label117.Text = "Все подсчитано верно = " + d;
+            //для 2-го колеса
+            label125.Text = "Ft_1 =  " + F_t1;
+            label124.Text = "Ft_2 =  " + F_t2;
+            label123.Text = "Fr_1 =  " + F_r1;
+            label122.Text = "Fr_2 =   " + F_r2;
+            label116.Text = "R_a1 = " + R_a2;
+            label115.Text = "sigma_k2 =  " + sigma_sk2;
+            label114.Text = "tao_kr12 =  " + tao_kr12;
+            label113.Text = "sigma_minus_1: =  " + sigma_minus_1;
+            label112.Text = "tao_minus_1 =  " + tao_minus_1;
+            label121.Text = "K_sigma_d =  " + K_sigma_d;
+            label119.Text = "P_sigma_2 =  " + P_sigma_2;
+            label111.Text = "P_tao_12 =   " + P_tao_12;
+            label110.Text = "P12 = " + P12;
+            label109.Text = "Все подсчитано верно = " + d5;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            l1 = double.Parse(textBox26.Text.ToString());
+            l2 = double.Parse(textBox25.Text.ToString());
+            Calculation3();
+        }
+
 
     }
 }
@@ -535,19 +676,19 @@ namespace WindowsFormsApp2
 
 
 
-/*//Цилиндрическая передача
-               case V>=15:
-               accuracy = '5A' . ' ' . 'для цилиндрической передачи';
-               break;
-               case V<15:
-               accuracy = '6A' . ' ' . 'для цилиндрической передачи';
-               break;
-               case V<10:
-               accuracy = '7A' . ' ' . 'для цилиндрической передачи';
-               break;
-               case V<6:
-               accuracy = '8A' . ' ' . 'для цилиндрической передачи';
-               break;
-               case V<2:
-               accuracy = '9A' . ' ' . 'для цилиндрической передачи';
-               break;*/
+////Цилиндрическая передача
+//               case V>=15:
+//               accuracy = '5A' . ' ' . 'для цилиндрической передачи';
+//               break;
+//               case V<15:
+//               accuracy = '6A' . ' ' . 'для цилиндрической передачи';
+//               break;
+//               case V<10:
+//               accuracy = '7A' . ' ' . 'для цилиндрической передачи';
+//               break;
+//               case V<6:
+//               accuracy = '8A' . ' ' . 'для цилиндрической передачи';
+//               break;
+//               case V<2:
+//               accuracy = '9A' . ' ' . 'для цилиндрической передачи';
+//               break;*/
