@@ -238,12 +238,29 @@
             this.label103 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label184 = new System.Windows.Forms.Label();
+            this.label185 = new System.Windows.Forms.Label();
+            this.label186 = new System.Windows.Forms.Label();
+            this.label187 = new System.Windows.Forms.Label();
+            this.label175 = new System.Windows.Forms.Label();
+            this.label176 = new System.Windows.Forms.Label();
+            this.label177 = new System.Windows.Forms.Label();
+            this.label178 = new System.Windows.Forms.Label();
+            this.label179 = new System.Windows.Forms.Label();
+            this.label180 = new System.Windows.Forms.Label();
+            this.label181 = new System.Windows.Forms.Label();
+            this.label118 = new System.Windows.Forms.Label();
+            this.textBox22 = new System.Windows.Forms.TextBox();
+            this.textBox23 = new System.Windows.Forms.TextBox();
+            this.label161 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -326,7 +343,7 @@
             this.button2.TabIndex = 147;
             this.button2.Text = "Расчет";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.button2.Click += new System.EventHandler(this.Button2_Click_1);
             // 
             // comboBox3
             // 
@@ -2005,7 +2022,7 @@
             this.button3.TabIndex = 271;
             this.button3.Text = "Расчет";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // label155
             // 
@@ -2384,16 +2401,176 @@
             this.button4.TabIndex = 347;
             this.button4.Text = "Расчет";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label184);
+            this.tabPage5.Controls.Add(this.label185);
+            this.tabPage5.Controls.Add(this.label186);
+            this.tabPage5.Controls.Add(this.label187);
+            this.tabPage5.Controls.Add(this.label175);
+            this.tabPage5.Controls.Add(this.label176);
+            this.tabPage5.Controls.Add(this.label177);
+            this.tabPage5.Controls.Add(this.label178);
+            this.tabPage5.Controls.Add(this.label179);
+            this.tabPage5.Controls.Add(this.label180);
+            this.tabPage5.Controls.Add(this.label181);
+            this.tabPage5.Controls.Add(this.label118);
+            this.tabPage5.Controls.Add(this.textBox22);
+            this.tabPage5.Controls.Add(this.textBox23);
+            this.tabPage5.Controls.Add(this.label161);
+            this.tabPage5.Controls.Add(this.button5);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(700, 512);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "tabPage5";
+            this.tabPage5.Text = "Расчет подшипников качения";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label184
+            // 
+            this.label184.AutoSize = true;
+            this.label184.Location = new System.Drawing.Point(188, 108);
+            this.label184.Name = "label184";
+            this.label184.Size = new System.Drawing.Size(47, 13);
+            this.label184.TabIndex = 413;
+            this.label184.Text = "label184";
+            // 
+            // label185
+            // 
+            this.label185.AutoSize = true;
+            this.label185.Location = new System.Drawing.Point(188, 75);
+            this.label185.Name = "label185";
+            this.label185.Size = new System.Drawing.Size(47, 13);
+            this.label185.TabIndex = 412;
+            this.label185.Text = "label185";
+            // 
+            // label186
+            // 
+            this.label186.AutoSize = true;
+            this.label186.Location = new System.Drawing.Point(188, 62);
+            this.label186.Name = "label186";
+            this.label186.Size = new System.Drawing.Size(47, 13);
+            this.label186.TabIndex = 411;
+            this.label186.Text = "label186";
+            // 
+            // label187
+            // 
+            this.label187.AutoSize = true;
+            this.label187.Location = new System.Drawing.Point(188, 46);
+            this.label187.Name = "label187";
+            this.label187.Size = new System.Drawing.Size(47, 13);
+            this.label187.TabIndex = 410;
+            this.label187.Text = "label187";
+            // 
+            // label175
+            // 
+            this.label175.AutoSize = true;
+            this.label175.Location = new System.Drawing.Point(499, 108);
+            this.label175.Name = "label175";
+            this.label175.Size = new System.Drawing.Size(47, 13);
+            this.label175.TabIndex = 407;
+            this.label175.Text = "label175";
+            // 
+            // label176
+            // 
+            this.label176.AutoSize = true;
+            this.label176.Location = new System.Drawing.Point(499, 75);
+            this.label176.Name = "label176";
+            this.label176.Size = new System.Drawing.Size(47, 13);
+            this.label176.TabIndex = 406;
+            this.label176.Text = "label176";
+            // 
+            // label177
+            // 
+            this.label177.AutoSize = true;
+            this.label177.Location = new System.Drawing.Point(499, 62);
+            this.label177.Name = "label177";
+            this.label177.Size = new System.Drawing.Size(47, 13);
+            this.label177.TabIndex = 405;
+            this.label177.Text = "label177";
+            // 
+            // label178
+            // 
+            this.label178.AutoSize = true;
+            this.label178.Location = new System.Drawing.Point(499, 46);
+            this.label178.Name = "label178";
+            this.label178.Size = new System.Drawing.Size(47, 13);
+            this.label178.TabIndex = 404;
+            this.label178.Text = "label178";
+            // 
+            // label179
+            // 
+            this.label179.AutoSize = true;
+            this.label179.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label179.Location = new System.Drawing.Point(457, 18);
+            this.label179.Name = "label179";
+            this.label179.Size = new System.Drawing.Size(208, 13);
+            this.label179.TabIndex = 403;
+            this.label179.Text = "Расчет диаметра для 2-го колеса";
+            // 
+            // label180
+            // 
+            this.label180.AutoSize = true;
+            this.label180.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label180.Location = new System.Drawing.Point(144, 18);
+            this.label180.Name = "label180";
+            this.label180.Size = new System.Drawing.Size(208, 13);
+            this.label180.TabIndex = 402;
+            this.label180.Text = "Расчет диаметра для 1-го колеса";
+            // 
+            // label181
+            // 
+            this.label181.AutoSize = true;
+            this.label181.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label181.Location = new System.Drawing.Point(294, 0);
+            this.label181.Name = "label181";
+            this.label181.Size = new System.Drawing.Size(143, 13);
+            this.label181.TabIndex = 401;
+            this.label181.Text = "Ввод исходных данных";
+            // 
+            // label118
+            // 
+            this.label118.AutoSize = true;
+            this.label118.Location = new System.Drawing.Point(7, 34);
+            this.label118.Name = "label118";
+            this.label118.Size = new System.Drawing.Size(20, 13);
+            this.label118.TabIndex = 400;
+            this.label118.Text = "С1";
+            // 
+            // textBox22
+            // 
+            this.textBox22.Location = new System.Drawing.Point(28, 57);
+            this.textBox22.Name = "textBox22";
+            this.textBox22.Size = new System.Drawing.Size(78, 20);
+            this.textBox22.TabIndex = 399;
+            // 
+            // textBox23
+            // 
+            this.textBox23.Location = new System.Drawing.Point(28, 31);
+            this.textBox23.Name = "textBox23";
+            this.textBox23.Size = new System.Drawing.Size(78, 20);
+            this.textBox23.TabIndex = 398;
+            // 
+            // label161
+            // 
+            this.label161.AutoSize = true;
+            this.label161.Location = new System.Drawing.Point(7, 59);
+            this.label161.Name = "label161";
+            this.label161.Size = new System.Drawing.Size(20, 13);
+            this.label161.TabIndex = 397;
+            this.label161.Text = "С2";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(7, 90);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(134, 31);
+            this.button5.TabIndex = 396;
+            this.button5.Text = "Расчет";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // tabPage6
             // 
@@ -2422,6 +2599,8 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2639,6 +2818,22 @@
         private System.Windows.Forms.Label label103;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label184;
+        private System.Windows.Forms.Label label185;
+        private System.Windows.Forms.Label label186;
+        private System.Windows.Forms.Label label187;
+        private System.Windows.Forms.Label label175;
+        private System.Windows.Forms.Label label176;
+        private System.Windows.Forms.Label label177;
+        private System.Windows.Forms.Label label178;
+        private System.Windows.Forms.Label label179;
+        private System.Windows.Forms.Label label180;
+        private System.Windows.Forms.Label label181;
+        private System.Windows.Forms.Label label118;
+        private System.Windows.Forms.TextBox textBox22;
+        private System.Windows.Forms.TextBox textBox23;
+        private System.Windows.Forms.Label label161;
+        private System.Windows.Forms.Button button5;
     }
 }
 

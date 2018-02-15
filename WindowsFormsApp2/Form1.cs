@@ -7,28 +7,31 @@ namespace WindowsFormsApp2
     public partial class Form1 : Form
     {
         //Первый расчет
-        public double T, n, nu_sinh, U,n_rem_per, n_pod, n_zub ,Tvuh, Tpotr, nu_obsh, Upriv,
-            Ured, U1_2, P_z1, P_z2, P_vuh, n_z1, n_z2,n_vuh, T_z1, T_z2, T_vuh, P_sh1, P_sh2,
-            n_sh1, n_sh2, T_sh1, T_sh2 , N_vhod, power;
+        public double T, n, nu_sinh, U, n_rem_per, n_pod, n_zub, Tvuh, Tpotr, nu_obsh, Upriv,
+            Ured, U1_2, P_z1, P_z2, P_vuh, n_z1, n_z2, n_vuh, T_z1, T_z2, T_vuh, P_sh1, P_sh2,
+            n_sh1, n_sh2, T_sh1, T_sh2, N_vhod, power;
         public string select;
         //Второй расчет
-        public double Kap = 9750, t1, t2, t3, P1, P2, P3 , Kh_alpha, Kh_betta, Kh_v , H1, H2 ,
-            k, σn_limb, Nh_o1, Nh_e1, Kh_l, σ_H1, σn_limb2, Nh_o12, Nh_e12, Kh_l2,σ_H12, min,
-            Kh, part2, a, a1, m, z1_sum_z2, z1, z2, U1_2f, delta_U, b, b2, d1, d2,d_a1, d_a2,
+        public double Kap = 9750, t1, t2, t3, P1, P2, P3, Kh_alpha, Kh_betta, Kh_v, H1, H2,
+            k, σn_limb, Nh_o1, Nh_e1, Kh_l, σ_H1, σn_limb2, Nh_o12, Nh_e12, Kh_l2, σ_H12, min,
+            Kh, part2, a, a1, m, z1_sum_z2, z1, z2, U1_2f, delta_U, b, b2, d1, d2, d_a1, d_a2,
             d_f1, d_f2, verify, V;
         public string metal_for_gear, metal_for_wheel, k_width, accuracy;
         //Третий расчет
-        public double Y_fi, T_max, P_ed, P_potr, sigma_t, E_a, Z_e, sigma_n, Z_m = 275, Z_h, 
-            sigma_solve, sigma_f_limb1, N_fe1, K_fl, Kf_alpha =1, Kf_betta = 1, Kf_v = 1.15,
-            N_f0 = 4000000, sigma_f1, s_f,sigma_f_limb2,N_fe2, U1_2_f, sigma_f2, sigma_f1_1,
-            k_per, sigma_n_max, sigma_f_max, sigma_f_max1, sigma_n_max1, Y_f1, Y_f2, 
+        public double Y_fi, T_max, P_ed, P_potr, sigma_t, E_a, Z_e, sigma_n, Z_m = 275, Z_h,
+            sigma_solve, sigma_f_limb1, N_fe1, K_fl, Kf_alpha = 1, Kf_betta = 1, Kf_v = 1.15,
+            N_f0 = 4000000, sigma_f1, s_f, sigma_f_limb2, N_fe2, U1_2_f, sigma_f2, sigma_f1_1,
+            k_per, sigma_n_max, sigma_f_max, sigma_f_max1, sigma_n_max1, Y_f1, Y_f2,
             verify3_2_1, verify3_2_2;
         public string S_h, verify3_4, verify3_3, verify3_1, verify3_2_2_2;
         //Четвертый расчет
         public double K_nu = 1.6, K_tao = 1.4, K_sigma = 1.5, K_tao_d = 0.7, K_sigma_b = 0.81,
-            d, d3, d4,d5, l1 ,l2, P_tabl = 2, sigma_b = 400, F_t1, F_t2, F_r1, F_r2, R_a1, R_a2, sigma_sk1, sigma_sk2, tao_kr11, tao_kr12,
+            d, d3, d4, d5, l1, l2, P_tabl = 2, sigma_b = 400, F_t1, F_t2, F_r1, F_r2, R_a1, R_a2, sigma_sk1, sigma_sk2, tao_kr11, tao_kr12,
             sigma_minus_1, tao_minus_1, K_sigma_d, P_sigma_1, P_sigma_2, P_tao_11, P_tao_12, P11, P12;
         public string result1, result2;
+        //Пятый расчет
+        public double C1, L10_ah1, P_r1, P_r2, L10_ah2, L10_2, L10_1, C2, Y = 0, X = 1, K_b = 1.2,
+            K_t = 1, V_c = 1, P = 3, a1_1 = 1, a23 = 0.75, Lh_potr = 12000;
 
         public Form1()
         {
@@ -146,7 +149,7 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void Button2_Click_1(object sender, EventArgs e)
         {
             T = (double.Parse(textBox1.Text));
             n = (double.Parse(textBox2.Text));
@@ -353,13 +356,15 @@ namespace WindowsFormsApp2
         {
 
             /*----------------Вычисление 3.1)------------*/
-            E_a = Math.Round(1.88 - 3.2 * ((1 / z1) + (1 / z2)),2);
+            E_a = Math.Round(1.88 - 3.2 * ((1 / z1) + (1 / z2)), 2);
             Z_h = Math.Sqrt(2 / Math.Sin(2 * 20));
-            Z_e = Math.Round(Math.Sqrt((4 - E_a) / 3),2);
-            sigma_n = Math.Round(Z_m * Z_h * Z_e * (1 / d1) * Math.Sqrt((2000 * 9550 * P_z1 * Kh_alpha * Kh_betta * Kh_v * (U1_2f + 1)) / (n_z1 * b * U1_2f)),2);
-            if (sigma_n <= min) {
+            Z_e = Math.Round(Math.Sqrt((4 - E_a) / 3), 2);
+            sigma_n = Math.Round(Z_m * Z_h * Z_e * (1 / d1) * Math.Sqrt((2000 * 9550 * P_z1 * Kh_alpha * Kh_betta * Kh_v * (U1_2f + 1)) / (n_z1 * b * U1_2f)), 2);
+            if (sigma_n <= min)
+            {
                 verify3_1 = sigma_n + "<" + min + "Проверка пройдена";
-            } else verify3_1 = sigma_n + ">" + min + "Ошибка";
+            }
+            else verify3_1 = sigma_n + ">" + min + "Ошибка";
             /*--------------------------------------------*/
 
             /*----------------Вычисление 3.2)-------------*/
@@ -367,7 +372,8 @@ namespace WindowsFormsApp2
             sigma_f_limb1 = 1.8 * H1;
             N_fe1 = 60 * n_z1 * (t1 * Math.Pow(P1, 6) + t2 * Math.Pow(P2, 6) + t3 * Math.Pow(P3, 6));
             K_fl = Math.Pow((N_f0 / N_fe1), 1 / m);
-            if (K_fl <= 1) {
+            if (K_fl <= 1)
+            {
                 K_fl = 1;
             }
             switch (S_h)
@@ -379,37 +385,46 @@ namespace WindowsFormsApp2
                     s_f = 1.75;
                     break;
             }
-            sigma_f1 = Math.Round((sigma_f_limb1 / s_f),1);
+            sigma_f1 = Math.Round((sigma_f_limb1 / s_f), 1);
             /*----------------Для колеса----------------*/
             sigma_f_limb2 = 1.8 * H2;
             N_fe2 = N_fe1 / U1_2f;
             K_fl = Math.Pow((N_f0 / N_fe2), 1 / m);
-            if (K_fl <= 1) {
+            if (K_fl <= 1)
+            {
                 K_fl = 1;
             }
-            sigma_f2 = Math.Round((sigma_f_limb2 / s_f),1);
-            if (z1 >= 17 || z1 <= 19) {
+            sigma_f2 = Math.Round((sigma_f_limb2 / s_f), 1);
+            if (z1 >= 17 || z1 <= 19)
+            {
                 Y_f1 = 4.28;
             }
-            if (z1 >= 20 || z1 <= 24) {
+            if (z1 >= 20 || z1 <= 24)
+            {
                 Y_f1 = 4.09;
             }
-            if (z1 >= 25 || z1 <= 29) {
+            if (z1 >= 25 || z1 <= 29)
+            {
                 Y_f1 = 3.9;
             }
-            if (z1 >= 30 || z1 <= 39) {
+            if (z1 >= 30 || z1 <= 39)
+            {
                 Y_f1 = 3.8;
             }
-            if (z1 >= 40 || z1 <= 49) {
+            if (z1 >= 40 || z1 <= 49)
+            {
                 Y_f1 = 3.7;
             }
-            if (z1 >= 50 || z1 <= 59) {
+            if (z1 >= 50 || z1 <= 59)
+            {
                 Y_f1 = 3.65;
             }
-            if (z1>= 60 || z1 <= 79) {
+            if (z1 >= 60 || z1 <= 79)
+            {
                 Y_f1 = 3.62;
             }
-            if (z1 >= 80 || z1 < 100) {
+            if (z1 >= 80 || z1 < 100)
+            {
                 Y_f1 = 3.61;
             }
             if (z1 >= 100)
@@ -454,30 +469,36 @@ namespace WindowsFormsApp2
                 Y_f2 = 3.6;
             }
             verify3_2_2 = sigma_f2 / Y_f2;
-            if (verify3_2_1 > verify3_2_2) {
-                sigma_f1_1 = Y_f2 * ((2000 * 9550 * P_z2 * Kf_alpha * Kf_betta * Kf_v)/ (m * b2 * d2 * n_z2));
+            if (verify3_2_1 > verify3_2_2)
+            {
+                sigma_f1_1 = Y_f2 * ((2000 * 9550 * P_z2 * Kf_alpha * Kf_betta * Kf_v) / (m * b2 * d2 * n_z2));
                 verify3_2_2_2 = sigma_f1_1 + "<" + sigma_f1 + "Проверка пройдена";
             }
-            else {
-                sigma_f1_1 = Y_f1 * ((2000 * 9550 * P_z1 * Kf_alpha * Kf_betta * Kf_v)/ (m * b2 * d1 * z2));
+            else
+            {
+                sigma_f1_1 = Y_f1 * ((2000 * 9550 * P_z1 * Kf_alpha * Kf_betta * Kf_v) / (m * b2 * d1 * z2));
             }
             /*---------------------------------------------*/
 
             /*----------------Вычисление 3.3)-------------*/
-            k_per = Math.Round((T_max) * (P_ed / P_potr),2);
-            sigma_n_max = Math.Round(sigma_n * Math.Sqrt(k_per),1);
+            k_per = Math.Round((T_max) * (P_ed / P_potr), 2);
+            sigma_n_max = Math.Round(sigma_n * Math.Sqrt(k_per), 1);
             sigma_n_max1 = 2.8 * sigma_t;
-            if (sigma_n_max <= sigma_n_max1) {
+            if (sigma_n_max <= sigma_n_max1)
+            {
                 verify3_3 = sigma_n_max + "<" + sigma_n_max1 + "Проверка пройдена";
-            } else verify3_3 = "Ошибка";
+            }
+            else verify3_3 = "Ошибка";
             /*---------------------------------------------*/
 
             /*----------------Вычисление 3.4)-------------*/
-            sigma_f_max = Math.Round(sigma_f1_1 * k_per,1);
+            sigma_f_max = Math.Round(sigma_f1_1 * k_per, 1);
             sigma_f_max1 = 2.75 * H2;
-            if (sigma_f_max <= sigma_f_max1) {
+            if (sigma_f_max <= sigma_f_max1)
+            {
                 verify3_4 = sigma_f_max + "<" + sigma_f_max1 + "Проверка пройдена";
-            } else verify3_4 = "Ошибка";
+            }
+            else verify3_4 = "Ошибка";
             /*---------------------------------------------*/
 
             /*-------------Вывод----------*/
@@ -515,7 +536,7 @@ namespace WindowsFormsApp2
             label72.Text = verify3_4;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
             Y_fi = (double.Parse(textBox11.Text));
             T_max = (double.Parse(textBox10.Text));
@@ -533,7 +554,7 @@ namespace WindowsFormsApp2
             F_t2 = (2 * T_z2) / (d_a2 * 0.001);
             F_r1 = F_t1 * 0.363970;
             F_r2 = F_t2 * 0.363970;
-            R_a1 = Math.Pow(((Math.Pow(F_r1, 2)) + (Math.Pow(F_t1, 2))),0.5);
+            R_a1 = Math.Pow(((Math.Pow(F_r1, 2)) + (Math.Pow(F_t1, 2))), 0.5);
             R_a2 = Math.Pow(((Math.Pow(F_r2, 2)) + (Math.Pow(F_t2, 2))), 0.5);
             /*-------------------------------------------------------*/
             /*----------------ПРОВЕРКА ДИАМЕТРОВ для 2-х колес------------*/
@@ -568,26 +589,33 @@ namespace WindowsFormsApp2
                 d = 95;
             }
 
-            if (d4 >= 30 && d4 < 40){
-                    d5 = 35;
+            if (d4 >= 30 && d4 < 40)
+            {
+                d5 = 35;
             }
-            if (d4 >= 40 && d4 < 50){
-                    d5 = 45;
+            if (d4 >= 40 && d4 < 50)
+            {
+                d5 = 45;
             }
-            if (d4 >= 50 && d4 < 60){
-                    d5 = 55;
+            if (d4 >= 50 && d4 < 60)
+            {
+                d5 = 55;
             }
-            if (d4 >= 60 && d4 < 70){
-                    d5 = 65;
+            if (d4 >= 60 && d4 < 70)
+            {
+                d5 = 65;
             }
-            if (d4 >= 70 && d4 < 80){
-                    d5 = 75;
+            if (d4 >= 70 && d4 < 80)
+            {
+                d5 = 75;
             }
-            if (d4 >= 80 && d4 < 90){
-                    d5 = 85;
+            if (d4 >= 80 && d4 < 90)
+            {
+                d5 = 85;
             }
-            if (d4 >= 90 && d4 < 100){
-                    d5 = 95;
+            if (d4 >= 90 && d4 < 100)
+            {
+                d5 = 95;
             }
             /*----------------Вычисление для 1-го колеса)------------*/
             tao_kr11 = T_z1 / (0.2 * Math.Pow(d, 3) * Math.Pow(10, -3));
@@ -655,15 +683,104 @@ namespace WindowsFormsApp2
             label109.Text = "Все подсчитано верно = " + d5;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)
         {
             l1 = double.Parse(textBox26.Text.ToString());
             l2 = double.Parse(textBox25.Text.ToString());
             Calculation3();
         }
 
+        public void Calculation4()
+        {
+            if (d == 35 && C1 == 25500)
+            {
+                if (L10_ah1 > Lh_potr)
+                {
+                    L10_1 = Math.Round(a1_1 * a23 * (Math.Pow(C1 / P_r1, P)), 1);
+                    L10_ah1 = Math.Round((Math.Pow(10, 6)) / (60 * n_z1) * L10_1);
+                }
+            }
+            if (d == 35 && C1 == 15900)
+            {
+                if (L10_ah1 > Lh_potr)
+                {
+                    L10_1 = Math.Round(a1_1 * a23 * (Math.Pow(C1 / P_r1, P)), 1);
+                    L10_ah1 = Math.Round((Math.Pow(10, 6)) / (60 * n_z1) * L10_1);
+                }
+            }
+            if (d == 35 && C1 == 33200)
+            {
+                if (L10_ah1 > Lh_potr)
+                {
+                    L10_1 = Math.Round(a1_1 * a23 * (Math.Pow(C1 / P_r1, P)), 1);
+                    L10_ah1 = Math.Round((Math.Pow(10, 6)) / (60 * n_z1) * L10_1);
+                }
+            }
+            if (d5 == 35 && C2 == 15900)
+            {
+                if (L10_ah2 > Lh_potr)
+                {
+                    L10_2 = Math.Round(a1_1 * a23 * (Math.Pow(C2 / P_r2, P)), 1);
+                    L10_ah2 = Math.Round((((Math.Pow(10, 6)) / (60 * n_z2)) * L10_2));
+                }
+            }
+            if (d5 == 35 && C2 == 25500)
+            {
+                if (L10_ah2 > Lh_potr)
+                {
+                    L10_2 = Math.Round(a1_1 * a23 * (Math.Pow(C2 / P_r2, P)), 1);
+                    L10_ah2 = Math.Round((((Math.Pow(10, 6)) / (60 * n_z2)) * L10_2));
+                }
+            }
+            if (d5 == 35 && C2 == 33200)
+            {
+                if (L10_ah2 > Lh_potr)
+                {
+                    L10_2 = Math.Round(a1_1 * a23 * (Math.Pow(C2 / P_r2, P)), 1);
+                    L10_ah2 = Math.Round((((Math.Pow(10, 6)) / (60 * n_z2)) * L10_2));
+                }
+            }
+            P_r1 = Math.Round(R_a1 * V_c * K_b * K_t, 1);
+            L10_1 = Math.Round(a1_1 * a23 * (Math.Pow(C2 / P_r1, P)), 1);
+            L10_ah1 = Math.Round((((Math.Pow(10, 6)) / (60 * n_z1)) * L10_1));
+            if (L10_ah1 > Lh_potr)
+            {
+                result1 = "Все правильно." + "\n" + "L10_ah1:" + L10_ah1 + ">" + Lh_potr;
+            }
+            else
+            {
+                result1 = "Все посчитано неверно!";
+            }
+            P_r2 = Math.Round(R_a2 * V_c * K_b * K_t, 1);
+            L10_2 = Math.Round(a1_1 * a23 * (Math.Pow(C1 / P_r2, P)), 1);
+            L10_ah2 = Math.Round((((Math.Pow(10, 6)) / (60 * n_z2)) * L10_2));
+            if (L10_ah2 > Lh_potr)
+            {
+                result2 = "Все правильно." + "\n" + "L10_ah2:" + L10_ah2 + ">" + Lh_potr;
+            }
+            else
+            {
+                result2 = "Все посчитано неверно!";
+            }
+            //**Вывод**//
+            label187.Text = "P_r1 =  " + P_r1;
+            label186.Text = "L10_1 =  " + L10_1;
+            label185.Text = "L10_ah1 =  " + L10_ah1;
+            label184.Text = "Результат =   " + result1;
+            label178.Text = "P_r2 =  " + P_r2;
+            label177.Text = "L10_2 =  " + L10_2;
+            label176.Text = "L10_ah2 =  " + L10_ah2;
+            label175.Text = "Результат =   " + result2;
+        }
 
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            C1 = double.Parse(textBox23.Text.ToString());
+            C2 = double.Parse(textBox22.Text.ToString());
+            Calculation4();
+        }
     }
+
 }
 
 
