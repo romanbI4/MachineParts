@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
+using SolidWorks.Interop.sldworks;
+using SolidWorks.Interop.swcommands;
+using SolidWorks.Interop.swconst;
 
 namespace WindowsFormsApp2
 {
@@ -10,6 +14,12 @@ namespace WindowsFormsApp2
         public double T, n, nu_sinh, U, n_rem_per, n_pod, n_zub, Tvuh, Tpotr, nu_obsh, Upriv,
             Ured, U1_2, P_z1, P_z2, P_vuh, n_z1, n_z2, n_vuh, T_z1, T_z2, T_vuh, P_sh1, P_sh2,
             n_sh1, n_sh2, T_sh1, T_sh2, N_vhod, power;
+
+        private void tabPage6_Click(object sender, EventArgs e)
+        {
+
+        }
+
         public string select;
         //Второй расчет
         public double Kap = 9750, t1, t2, t3, P1, P2, P3, Kh_alpha, Kh_betta, Kh_v, H1, H2,
@@ -32,11 +42,19 @@ namespace WindowsFormsApp2
         //Пятый расчет
         public double C1, L10_ah1, P_r1, P_r2, L10_ah2, L10_2, L10_1, C2, Y = 0, X = 1, K_b = 1.2,
             K_t = 1, V_c = 1, P = 3, a1_1 = 1, a23 = 0.75, Lh_potr = 12000;
+        //Отрисовка
+        double d11, d22, d33, d44, d55;
+        double l11, l22, l33, l44, l55;
+        double L11, L22, L33, L44, L55;
+        static string textStatus = "Ожидание";
 
         public Form1()
         {
             InitializeComponent();
         }
+
+        SldWorks SwApp;
+        IModelDoc2 swModel;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -779,8 +797,157 @@ namespace WindowsFormsApp2
             C2 = double.Parse(textBox22.Text.ToString());
             Calculation4();
         }
-    }
 
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel2.Text = textStatus;
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+            textStatus = "Проверка данных";
+            try
+            {
+                d11 = 30.0 / 1000;
+                d22 = 35.0 / 1000;
+                d33 = 40.0 / 1000;
+                d44 = d2;
+                d55 = 45.0 / 1000;
+                //
+                l11 = 30.0 / 1000;
+                l22 = 60.0 / 1000;
+                l33 = 50.0 / 1000;
+                l44 = 35.0 / 1000;
+                l55 = 10.0 / 1000;
+                //
+                L11 = l55;
+                L22 = l55 + l33;
+                L33 = L22 + l22;
+                L44 = L33 + l11;
+                L55 = l44;
+                if (d11 >= d22 || d22 >= d33 || d33 >= d55)
+                    throw new Exception();
+                if (l11 <= 0 || l22 <= 0 || l33 <= 0
+                    || l44 <= 0 || l55 <= 0)
+                    throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка",
+                    "Ошибка ввода данных",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                textStatus = "Ошибка";
+            }
+            textStatus = "Данные приняты";
+            Thread.Sleep(500);
+            try
+            {
+                //Запуск Solidworks 2016
+                Guid myGuid1 = new Guid("F16137AD-8EE8-4D2A-8CAC-DFF5D1F67522");
+                //запуск от имени процесса
+                object processSW = Activator.CreateInstance(Type.GetTypeFromProgID("SldWorks.Application"));
+                SwApp = (SldWorks)processSW;
+                SwApp.Visible = true;
+                //Создание нового документа детали
+                SwApp.NewPart();
+                swModel = SwApp.IActiveDoc2;
+                textStatus = "Solidworks запущен";
+                Thread.Sleep(250);
+                //Код построения модели
+                textStatus = "Отрисовка вала";
+                //выбрал плоскость 
+                swModel.Extension.SelectByID2("Спереди", "PLANE", 0, 0, 0, false, 0, null, 0);
+                //цилиндр1
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                SketchSegment skSegment1 = swModel.SketchManager.CreateCircle(0, 0, 0, d55 / 2.0, 0, 0);
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                skSegment1.Select(true);
+                swModel.FeatureBoss(true, false, true,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    L11, 0, false, false, true, true, 0, 0, false, false);
+                textStatus = "Отрисовка вала 20%";
+                //выбрал плоскость 
+                swModel.Extension.SelectByID2("Спереди", "PLANE", 0, 0, 0, false, 0, null, 0);
+                //цилиндр2
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                SketchSegment skSegment2 = swModel.SketchManager.CreateCircle(0, 0, 0, d33 / 2.0, 0, 0);
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                skSegment2.Select(true);
+                swModel.FeatureBoss(true, false, true,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    L22, 0, false, false, true, true, 0, 0, false, false);
+                textStatus = "Отрисовка вала 40%";
+                //выбрал плоскость 
+                swModel.Extension.SelectByID2("Спереди", "PLANE", 0, 0, 0, false, 0, null, 0);
+                //цилиндр3
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                SketchSegment skSegment3 = swModel.SketchManager.CreateCircle(0, 0, 0, d22 / 2.0, 0, 0);
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                skSegment3.Select(true);
+                swModel.FeatureBoss(true, false, true,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    L33, 0, false, false, true, true, 0, 0, false, false);
+                textStatus = "Отрисовка вала 60%";
+                //выбрал плоскость 
+                swModel.Extension.SelectByID2("Спереди", "PLANE", 0, 0, 0, false, 0, null, 0);
+                //цилиндр4
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                SketchSegment skSegment4 = swModel.SketchManager.CreateCircle(0, 0, 0, d11 / 2.0, 0, 0);
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                skSegment4.Select(true);
+                swModel.FeatureBoss(true, false, true,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    L44, 0, false, false, true, true, 0, 0, false, false);
+                textStatus = "Отрисовка вала 80%";
+                //выбрал плоскость 
+                swModel.Extension.SelectByID2("Спереди", "PLANE", 0, 0, 0, false, 0, null, 0);
+                //цилиндр5
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                SketchSegment skSegment5 = swModel.SketchManager.CreateCircle(0, 0, 0, d44 / 2.0, 0, 0);
+                swModel.SketchManager.InsertSketch(true);
+                //вставил эскиз  
+                skSegment5.Select(true);
+                swModel.FeatureBoss(true, false, false,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    (int)swEndConditions_e.swEndCondBlind,
+                    L55, 0, false, false, true, true, 0, 0, false, false);
+                textStatus = "Отрисовка вала 100%";
+                //Сохранить модель в файл
+                swModel.SaveAs3("D:\\вал.sldprt", 0, 2);
+                //Выход из Solidworks
+                SwApp.ExitApp();
+                SwApp = null;
+                textStatus = "Файл сохранён";
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка", "Ошибка Solidworks",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                //Выход из Solidworks
+                SwApp.ExitApp();
+                SwApp = null;
+                textStatus = "Ошибка";
+            }
+
+        }
+
+    }
 }
 
 
